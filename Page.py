@@ -6,11 +6,6 @@ class Page:
         self.__page_id = page_id
         self.__is_empty = True
 
-        # Creating data file
-        file_name = "" + page_id + ".txt"
-        data_file = open(file_name, "a+")
-        data_file.close()
-
 
     # Getters/Setters
     def getPageId(self):
@@ -20,27 +15,36 @@ class Page:
     def isEmpty(self):
         return self.__is_empty
 
-    def pushToFile(self, text : str):
+    def pushToDataFile(self, text : str):
         if (text == ""):
             return
 
-        data_file = open(self.__page_id, "a+")
-        data_file.write(text)
-        data_file.close()
+        try:
+            data_file = open(self.__page_id, "a+")
+            data_file.write(text)
+            data_file.close()
 
-        if (self.__is_empty == True):
-            self.__is_empty == False
+            if (self.__is_empty == True):
+                self.__is_empty == False
+            
+            return 1
+
+        except:
+            print("ERROR: could not push data to file")
+            return 0
+    
+    def readFromDataFile(self):
+        pass
         
     def destroyPage(self):
         file_name = "" + self.__page_id + ".txt"
 
-        print("destroying page... ")
         if (os.path.exists(file_name)):
             os.remove(file_name)
             self.__is_empty == True
-            print("successful")
+
         else: 
-            print(file_name, "does not exist.")
+            print("WARNING: page deleted, but ", file_name, " does not exist")
 
 
 # Test function
