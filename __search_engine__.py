@@ -1,34 +1,43 @@
-try:
-    from googlesearch import search
-except ImportError:
-    print("No Module named 'google' found.")
+from googlesearch import search
 
 from Website import Website
-from Webpage import Webpage
 
 __SEARCH_DELAY = 5
-websites = []
+__websites = {} # {URL : Website}
 
-def googleSearch(query: str, result_cnt: int):
+def googleSearch(query : str, result_cnt : int):
     sites = []
 
     try:
         for result in search(query, tld = "co.in", num = result_cnt, stop = result_cnt, pause =__SEARCH_DELAY):
             sites.insert(-1, result)
     except:
-        print("Error: search terminated. [Issue performing google search]")
+        print("Error: search terminated [issue performing google search]")
 
     return sites
+    
 
-def createWebsite():
-    pass
-    # Create site.
-    # Check if ID is unique (idResuffle)
+def createWebsite(url : str):
+    new_site = Website(url)
+    new_site.constructPages()
+    __websites.update({url :new_site})
+
+def destroyWebsite(url : str):
+    target_site = __websites[url]
+
+    target_site.destroySource()
+    __websites.pop(url)
 
 
 def main():
-    sites = googleSearch("All about dobermans", 5)
-    print(sites)
+    urls = googleSearch("all about dobermans", 3)
+
+    for url in urls:
+        createWebsite(url)
+    
+    for url in urls:
+        destroyWebsite(url)
+        
     
 
 if (__name__ == "__main__"):

@@ -13,13 +13,13 @@ class Website(Source):
     # Getters/Setters
     def getSiteURL(self):
         return self.__site_url
+        
 
 
 # Test function
 def test():
     w = Website("helloworld.com")
 
-    print("ID: ", w.getSourceId())
     print("Type: ", w.getSourceType())
     print("Pages: ", w.getNumPages())
     print("URL: ", w.getSiteURL())

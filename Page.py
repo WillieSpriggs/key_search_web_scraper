@@ -20,7 +20,7 @@ class Page:
             return
 
         try:
-            data_file = open(self.__page_id, "a+")
+            data_file = open(self.__page_id + ".txt", "a+")
             data_file.write(text)
             data_file.close()
 
@@ -28,12 +28,11 @@ class Page:
                 self.__is_empty == False
             
             return 1
-
         except:
-            print("ERROR: could not push data to file")
+            print("ERROR: could not push data to file: ", self.__page_id)
             return 0
     
-    def readFromDataFile(self):
+    def pullFromDataFile(self):
         pass
         
     def destroyPage(self):
@@ -42,7 +41,6 @@ class Page:
         if (os.path.exists(file_name)):
             os.remove(file_name)
             self.__is_empty == True
-
         else: 
             print("WARNING: page deleted, but ", file_name, " does not exist")
 
