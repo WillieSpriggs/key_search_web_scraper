@@ -68,9 +68,16 @@ class Source:
 
 
     def constructPages(self):
+        if (len(self.__active_pages) < 1):
+            return
+
         for page in self.__active_pages:
             target_page = self.__active_pages[page]
             target_page.parseWebpage()
+
+        for page in self.__active_pages:
+            if (self.__active_pages[page].isEmpty()):
+                self.__active_pages[page].destroyPage()
 
 
     def readFromPage(self, page_reference : str):

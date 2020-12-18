@@ -25,7 +25,7 @@ class Page:
             data_file.close()
 
             if (self.__is_empty == True):
-                self.__is_empty == False
+                self.__is_empty = False
             
             return 1
         except:

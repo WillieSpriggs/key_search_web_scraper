@@ -35,8 +35,8 @@ def main():
     for url in urls:
         createWebsite(url)
     
-    for url in urls:
-        destroyWebsite(url)
+    # for url in urls:
+    #     destroyWebsite(url)
         
     
 

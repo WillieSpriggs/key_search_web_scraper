@@ -16,8 +16,6 @@ class Webpage(Page):
 
     # Methods
     def parseWebpage(self):
-        self.pushToDataFile("URL: " + self.__page_url + "\n")
-        
         try:
             source = requests.get(self.__page_url)
         except:
@@ -25,20 +23,28 @@ class Webpage(Page):
             return 0
 
         soup = BeautifulSoup(source.text, "lxml")
-        try:
-            title = soup.find("title").getText()
-            self.pushToDataFile("Title: " + title + "\n")
-        except:
-            print("WARNING: could not find title for source: ", self.__page_url)
 
         try:
-            for paragraph in soup.find_all("p"):
-                if (paragraph.getText() != ""):
-                    self.pushToDataFile(paragraph.getText() + "\n")
-    
+            paragraphs = soup.find_all("p")
         except:
             print("ERROR: issue finding paragraph tags")
             return 0
+        
+        # Push file header
+        try:
+            title = soup.find("title").getText()
+        except:
+            title = None
+            print("WARNING: could not find title for source: ", self.__page_url)
+
+        self.pushToDataFile("URL: " + self.__page_url + "\n")
+        if (title != None):
+            self.pushToDataFile("Title: " + title + "\n")
+        
+        # Push data to file
+        for p in paragraphs:
+            if (p.getText() != ""):
+                self.pushToDataFile(p.getText() + "\n")
         
         return 1
 
