@@ -32,14 +32,34 @@ Sprint 2:
 
 Spring 3:
     * Defensive coding and error prevention. [test and push]
-    * Format page data files for reading.
-    * Read data from appropriate page and print it to screen.
-        Define readFromPage function given page reference and data.
-    * Read all data from all pages of a website with single function call.
+    * Add key word feature.
+    * Parse paragraph tag based on given keys and push contents to data file.
+    * Format page data files for reading using html tags.
 
 Sprint 4:
-    * Fix the Wikipedia error [https://en.wikipedia.org/wiki/Dobermann]
-        Background: When the program tries to write unknown characrters to file, parseWebpage function breaks.
-        Writes to file until it reaches unknown character.
-        Possible solutions: Before calling push to file, check if the paragraph contains only basic characters.
-        If the program fails to write to file, skip that iteration and keep moving forward.
+    * Defensive coding and error prevention. [test and push]
+    * Read google query, number of search results, keywords, and number of supporting sentences from command line.
+    * If needed, pull key sentences from previous paragraph tag.
+        In the case of short paragraphs, supporting sentences may span across multiple paragraph tags.
+        Test url: https://www.biography.com/us-president/barack-obama
+    * Create JSON file with names of websites and corresponding pages.
+
+Sprint 5:
+    * Defensive coding and error prevention. [test and push]
+    * Research web crawlers and efficient web crawing methods.
+    * Create web crewling method for Website class.
+    * Within the website constructor, call web crawler method and add Webage for each new page.
+    * Successfully keysearch all pages of a website.
+
+Sprint :
+    * Read data from appropriate page and print it to screen.
+        Define readFromPage function given page reference and data.
+    * Read all data from multiple websites using single function call.
+    
+Stretch Goals:
+    * Determine if string is safe to be pushed to file (doesn't contain weird characters).
+        The Wikipedia error [https://en.wikipedia.org/wiki/Dobermann]
+            Background: When the program tries to write unknown characrters to file, parseWebpage function breaks.
+            Writes to file until it reaches unknown character.
+            Possible solutions: Before calling push to file, check if the paragraph contains only basic characters.
+            If the program fails to write to file, skip that iteration and keep moving forward.

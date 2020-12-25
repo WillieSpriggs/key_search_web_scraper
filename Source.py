@@ -60,24 +60,28 @@ class Source:
             print("ERROR: could not delete page [no page reference given]")
             return
 
-        if (page_reference in self.__active_pages):
+        if (page_reference in self.__active_pages.keys()):
             self.__active_pages[page_reference].destroyPage()
             self.__num_pages -= 1
             print("disposing ", page_reference)
             self.__active_pages.pop(page_reference)
 
 
-    def constructPages(self):
+    def constructPages(self, keywords : list, num_supporting : int):
         if (len(self.__active_pages) < 1):
             return
 
-        for page in self.__active_pages:
-            target_page = self.__active_pages[page]
-            target_page.parseWebpage()
+        if (self.__source_type == "Website"):
+            for page in self.__active_pages:
+                self.__active_pages[page].parseWebpage(keywords, num_supporting)
 
-        for page in self.__active_pages:
+        # If page is empty, remove it from list of pages. 
+        delete_pages = []
+        for page in self.__active_pages.keys():
             if (self.__active_pages[page].isEmpty()):
-                self.__active_pages[page].destroyPage()
+                delete_pages.append(page)
+        for page in delete_pages:
+            self.deletePage(page)
 
 
     def readFromPage(self, page_reference : str):

@@ -23,9 +23,10 @@ class Page:
             data_file = open(self.__page_id + ".txt", "a+")
             data_file.write(text)
             data_file.close()
-
-            if (self.__is_empty == True):
-                self.__is_empty = False
+            
+            if (text[0 : 5] != "<url>" and text[0 : 7] != "<title>"):
+                if (self.__is_empty == True):
+                    self.__is_empty = False
             
             return 1
         except:

@@ -4,6 +4,8 @@ from Website import Website
 
 __SEARCH_DELAY = 5
 __websites = {} # {URL : Website}
+# keywords = []
+# num_supporting = 0
 
 def googleSearch(query : str, result_cnt : int):
     sites = []
@@ -17,10 +19,13 @@ def googleSearch(query : str, result_cnt : int):
     return sites
     
 
-def createWebsite(url : str):
+def createWebsite(url : str, keywords : list, num_supporting : int):
     new_site = Website(url)
-    new_site.constructPages()
-    __websites.update({url :new_site})
+    new_site.constructPages(keywords, num_supporting)
+
+    # If the site is not empty, add it to list of sites.
+    if (new_site.getNumPages() > 0):
+        __websites.update({url :new_site})
 
 def destroyWebsite(url : str):
     target_site = __websites[url]
@@ -30,10 +35,18 @@ def destroyWebsite(url : str):
 
 
 def main():
-    urls = googleSearch("all about dobermans", 3)
+    urls = googleSearch("joe biden policies", 5)
+    keywords = ["coronavirus", "health care", "millitary", "security", "foreign policy"]
+    num_supporting = 3
 
     for url in urls:
-        createWebsite(url)
+        createWebsite(url, keywords, num_supporting)
+
+    if (len(__websites) > 0):
+        pass
+        # Create and return JSON file.
+    else: 
+        print("ERROR: No results found for keywords ", keywords)
     
     # for url in urls:
     #     destroyWebsite(url)
