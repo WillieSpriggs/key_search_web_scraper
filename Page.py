@@ -32,9 +32,6 @@ class Page:
         except:
             print("ERROR: could not push data to file: ", self.__page_id)
             return 0
-    
-    def pullFromDataFile(self):
-        pass
         
     def destroyPage(self):
         file_name = "" + self.__page_id + ".txt"

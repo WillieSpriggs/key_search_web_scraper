@@ -1,11 +1,11 @@
+import sys, getopt
+import json
 from googlesearch import search
 
 from Website import Website
 
 __SEARCH_DELAY = 5
 __websites = {} # {URL : Website}
-# keywords = []
-# num_supporting = 0
 
 def googleSearch(query : str, result_cnt : int):
     sites = []
@@ -33,25 +33,61 @@ def destroyWebsite(url : str):
     target_site.destroySource()
     __websites.pop(url)
 
+def createJSON():
+    json_string = "["
 
-def main():
-    urls = googleSearch("joe biden policies", 5)
-    keywords = ["coronavirus", "health care", "millitary", "security", "foreign policy"]
-    num_supporting = 3
+    for website in __websites:
+        json_string += __websites[website].generateJSONString()
+    
+    # Removing final comma and capping string.
+    json_string = json_string[:-1] + "]"
 
+    # Creating the JSON file.
+    with open("__search_engine__.json", "w") as json_file:
+        json.dump(json_string, json_file)
+
+
+def main(argv : str):
+    query = None
+    num_results = None
+    keywords = None
+    num_supporting = None
+
+    # Read in command line arguments.
+    try:
+        opts, args = getopt.getopt(argv, "q:r:k:s:")
+    except getopt.GetoptError:
+        print("ERROR: error reading command line arguments [__search_engine__.py -q <\"query\">] -r <num_results> -k <keywords> -s <num_supporting>")
+        return
+    
+    for opt, arg in opts:
+        if (opt == '-q'):
+            query = arg
+        elif (opt == '-r'):
+            num_results = int(arg)
+        elif (opt == '-k'):
+            keywords = arg
+        elif (opt == '-s'):
+            num_supporting = int(arg)
+        else:
+            print("ERROR: opt argument " + opt + " was not recognized")
+            return
+    
+    # Preparing arguments for program use.
+    keywords = keywords.split(',')
+
+    # Beginning key search.
+    urls = googleSearch(query, num_results)
     for url in urls:
         createWebsite(url, keywords, num_supporting)
 
+    # Creating JSON file.
     if (len(__websites) > 0):
-        pass
-        # Create and return JSON file.
+        createJSON()
     else: 
         print("ERROR: No results found for keywords ", keywords)
-    
-    # for url in urls:
-    #     destroyWebsite(url)
         
     
 
 if (__name__ == "__main__"):
-    main()
+    main(sys.argv[1:])

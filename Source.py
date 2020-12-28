@@ -66,7 +66,6 @@ class Source:
             print("disposing ", page_reference)
             self.__active_pages.pop(page_reference)
 
-
     def constructPages(self, keywords : list, num_supporting : int):
         if (len(self.__active_pages) < 1):
             return
@@ -82,10 +81,6 @@ class Source:
                 delete_pages.append(page)
         for page in delete_pages:
             self.deletePage(page)
-
-
-    def readFromPage(self, page_reference : str):
-        pass
     
     def destroySource(self):
         # Create a list of all keys in __active_pages dict

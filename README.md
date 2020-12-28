@@ -42,6 +42,8 @@ Sprint 4:
     * If needed, pull key sentences from previous paragraph tag.
         In the case of short paragraphs, supporting sentences may span across multiple paragraph tags.
         Test url: https://www.biography.com/us-president/barack-obama
+    * buffer_front = none too often. [call splitSentences on all paragraphs and set buffer_front]
+    * Finish incomplete_search functionality.
     * Create JSON file with names of websites and corresponding pages.
 
 Sprint 5:
@@ -51,7 +53,14 @@ Sprint 5:
     * Within the website constructor, call web crawler method and add Webage for each new page.
     * Successfully keysearch all pages of a website.
 
+Sprint 6: 
+    * Final defensive coding and error prevention for search engine program.
+    * Research web application development methods.
+    * Update Lucidchart program design [search engine program interacts directly with search engine program]
+
 Sprint :
+    * Pretext/Posttext bug. Pass in the number of additional sentences needed to completion functions.
+    * Error prevention [no query, results = 0, ...]
     * Read data from appropriate page and print it to screen.
         Define readFromPage function given page reference and data.
     * Read all data from multiple websites using single function call.
