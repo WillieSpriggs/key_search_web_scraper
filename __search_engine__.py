@@ -36,9 +36,12 @@ def destroyWebsite(url : str):
 def createJSON():
     json_string = "["
 
-    for website in __websites:
-        json_string += __websites[website].generateJSONString()
-    
+    if (len(__websites) > 0):
+        for website in __websites:
+            json_string += __websites[website].generateJSONString()
+    else:
+        json_string += "{\"website_url\": None, \"page_url\": None, \"file_name\": None},"
+
     # Removing final comma and capping string.
     json_string = json_string[:-1] + "]"
 
@@ -74,18 +77,16 @@ def main(argv : str):
             return
     
     # Preparing arguments for program use.
-    keywords = keywords.split(',')
+    if (keywords != "" and num_results > 0 and query != ""):
+        keywords = keywords.split(',')
 
-    # Beginning key search.
-    urls = googleSearch(query, num_results)
-    for url in urls:
-        createWebsite(url, keywords, num_supporting)
+        # Beginning key search.
+        urls = googleSearch(query, num_results)
+        for url in urls:
+            createWebsite(url, keywords, num_supporting)
 
     # Creating JSON file.
-    if (len(__websites) > 0):
-        createJSON()
-    else: 
-        print("ERROR: No results found for keywords ", keywords)
+    createJSON()
         
     
 
