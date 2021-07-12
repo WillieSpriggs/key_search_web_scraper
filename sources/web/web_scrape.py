@@ -62,18 +62,6 @@ def tagsListToStringsList(tags_list: list):
 #   return supporting_pages
 
 
-# Test script
-def main():
-  soup = buildSoup("https://en.wikipedia.org/wiki/%22Hello,_World!%22_program")
-  title = getTitle(soup)
-  paragraphs = getParagraphs(soup)
-
-  print(paragraphs)
-
-if (__name__ == "__main__"):
-    main()
-
-
 
   
 

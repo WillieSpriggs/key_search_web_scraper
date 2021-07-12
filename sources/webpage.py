@@ -28,11 +28,3 @@ class Webpage(Page):
 
     self._Page__json = json
 
-# Test script
-def main():
-  webpage = Webpage("https://www.humanesociety.org/resources/top-reasons-adopt-pet", "0000000")
-  webpage.parseWebpage(["healthy"], 2)
-  print(webpage.getJson())
-
-if (__name__ == "__main__"):
-    main()

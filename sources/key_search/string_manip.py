@@ -32,11 +32,3 @@ def trimSpaces(sentence: str):
       sentence = sentence[:-1]
 
   return sentence
-
-# Test script
-def main():
-  paragraph = "Hello, my name is Willie! How are you today? I am feeling great."
-  print(splitParagraphIntoSentences(paragraph))
-
-if (__name__ == "__main__"):
-    main()

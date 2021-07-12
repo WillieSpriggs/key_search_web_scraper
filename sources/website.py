@@ -32,12 +32,3 @@ class Website(Source):
     
     self._Source__json = json
 
-# Test Script
-def main():
-  site = Website("https://www.humanesociety.org/resources/top-reasons-adopt-pet")
-  site.addPage("https://www.humanesociety.org/resources/top-reasons-adopt-pet")
-  site.parseWebsite(["healthy"], 2)
-  print(site.getJson())
-
-if (__name__ == "__main__"):
-    main()

@@ -17,15 +17,3 @@ def findKeySentences(sentences: list, keywords: list, num_supporting: int):
           key_sentences[j] = sentences[j]
 
   return list(key_sentences.values())
-
-# Test script
-def main():
-  paragraphs = [
-    "Hello, my name is Willie! How are you today? I am feeling great.",
-    "I like to hangout with friends. I also like to spend time with family!",
-    "To stay healthy, I like to work out. I also try to eat healthy."
-    ]
-  print(keySearch(paragraphs, ["eaT"], 2))
-
-if (__name__ == "__main__"):
-    main()

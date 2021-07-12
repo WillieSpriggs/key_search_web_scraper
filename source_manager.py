@@ -25,15 +25,6 @@ class SourceManager:
     with open ("search_results.json", "w") as json_file:
       json_file.write(json.dumps({ "sources": sources }))
 
-# Test Script
-def main():
-  manager = SourceManager()
-  manager.createWebsite("https://www.humanesociety.org/resources/top-reasons-adopt-pet")
-  manager.parseAllSources(["healthy"], 2)
-  manager.generateJson()
-
-if (__name__ == "__main__"):
-    main()
     
 
   
